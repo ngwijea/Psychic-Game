@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Rock Paper Scissors Part 7</title>
+  </head>
+
+  <body>
+    <div>
+      <p id="directions-text">Guess What Letter I'm Thinking</p>
+      <p id="wins-text"></p>
+      <p id="losses-text"></p>
+      <p id="guessleft-text"></p>
+      <p id="userchoice-text"></p>
+    </div>
+
+    <script type="text/javascript">
+      // Creates an array that lists out all of the possible letters to guess.
+      var computerChoices = ["a", "b", "c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"];
+
+      // Creating variables to hold the number of wins, losses left. They start at 0.
+      var wins = 0;
+      var losses = 0;
+
+      // Creating variables to hold the number of guesses left. They start at 10
+      var guessleft = 10
+
+
+      // Create variables that hold references to the places in the HTML where we want to display things.
+      var directionsText = document.getElementById("directions-text");
+      var userChoiceText = document.getElementById("userchoice-text");
+      var computerChoiceText = document.getElementById("computerchoice-text");
+      var winsText = document.getElementById("wins-text");
+      var lossesText = document.getElementById("losses-text");
+      var guessleftText = document.getElementById("guessleft-text");
+
+      function myFunction(stringToConsole) {
+        console.log("this" + stringToConsole);
+      }
+
+      // This function is run whenever the user presses a key.
+      document.onkeyup = function(event) {
+        // Determines which key was pressed.
+        var userGuess = event.key;
+
+        // Randomly chooses a choice from the options array. This is the Computer's guess.
+        var computerGuess =
+          computerChoices[Math.floor(Math.random() * computerChoices.length)];
+
+
+        // This logic determines the outcome of the game (win/loss/tie), and increments the appropriate number
+        if (userGuess === computerGuess) {
+          if (
+            (userGuess === "r" && computerGuess === "s") ||
+            (userGuess === "s" && computerGuess === "p") ||
+            (userGuess === "p" && computerGuess === "r")
+          ) {
+            wins++;
+          } else if (userGuess === computerGuess) {
+            ties++;
+          } else {
+            losses++;
+          }
+
+          // Hide the directions
+          directionsText.textContent = "";
+
+          // Display the user and computer guesses, and wins/losses/ties.
+          userChoiceText.textContent = "You chose: " + userGuess;
+          computerChoiceText.textContent =
+            "The computer chose: " + computerGuess;
+          winsText.textContent = "wins: " + wins;
+          lossesText.textContent = "losses: " + losses;
+          tiesText.textContent = "ties: " + ties;
+        }
+      };
+    </script>
+  </body>
+</html>

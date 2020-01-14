@@ -49,27 +49,32 @@
 
 
         // This logic determines the outcome of the game (win/loss/guesses left), and increments the appropriate number
+        
         if (userGuess === computerGuess) {
             wins++;
+            resetGame();
           } 
-          else if (guessleft - 1 == 0) {
-            losses++;
-          } else {
+        if (userGuess !== computerGuess)  {
             guessleft--;
             guessedLetters.push(userGuess)
-          }
+          } 
+          if (guessleft === 0) {
+            losses++;
+            resetGame();
+        }
 
-
-          // Display the user wins/losses/guess left.
+        // Display the user wins/losses/guess left.
           winsText.textContent = wins;
           lossesText.textContent = losses;
           guessLeftText.textContent = guessleft;
           guessedLettersText.textContent = guessedLetters;
 
-        //   Reset Game if guesses done
-
-
-        };
+        //   Reset Game if guesses done or win
+        function resetGame() {
+            guessLeft = 10;
+            guessedLetters = [];
+        }
+    };
       
     </script>
   </body>

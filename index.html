@@ -52,7 +52,8 @@
         
         if (userGuess === computerGuess) {
             wins++;
-            resetGame();
+            guessleft = 10;
+            guessedLetters = [];
           } 
         if (userGuess !== computerGuess)  {
             guessleft--;
@@ -60,7 +61,8 @@
           } 
           if (guessleft === 0) {
             losses++;
-            resetGame();
+            guessleft = 10;
+            guessedLetters = [];
         }
 
         // Display the user wins/losses/guess left.
@@ -69,11 +71,6 @@
           guessLeftText.textContent = guessleft;
           guessedLettersText.textContent = guessedLetters;
 
-        //   Reset Game if guesses done or win
-        function resetGame() {
-            guessLeft = 10;
-            guessedLetters = [];
-        }
     };
       
     </script>

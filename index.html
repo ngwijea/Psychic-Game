@@ -2,16 +2,21 @@
 <html lang="en-us">
   <head>
     <meta charset="UTF-8" />
-    <title>Rock Paper Scissors Part 7</title>
+    <title>The Psychic Game</title>
   </head>
 
   <body>
     <div>
-      <p id="directions-text">Guess What Letter I'm Thinking</p>
-      <p id="wins-text"></p>
-      <p id="losses-text"></p>
-      <p id="guessleft-text"></p>
-      <p id="userchoice-text"></p>
+        <h1>The Psychic Game</h1>
+      <h3>Guess What Letter I am Thinking </h3>
+      <h4>Wins:
+      <p id="wins-text"></p></h4>
+      <h4>Losses:
+      <p id="losses-text"></p></h4>
+      <h4>Guesses Left:
+      <p id="guessleft-text"></p></h4>
+      <h4>Guesses So far:
+      <p id="guessedLetters-text"></p></h4>
     </div>
 
     <script type="text/javascript">
@@ -24,19 +29,15 @@
 
       // Creating variables to hold the number of guesses left. They start at 10
       var guessleft = 10
-
+      var guessedLetters = []
 
       // Create variables that hold references to the places in the HTML where we want to display things.
-      var directionsText = document.getElementById("directions-text");
-      var userChoiceText = document.getElementById("userchoice-text");
-      var computerChoiceText = document.getElementById("computerchoice-text");
       var winsText = document.getElementById("wins-text");
       var lossesText = document.getElementById("losses-text");
-      var guessleftText = document.getElementById("guessleft-text");
+      var guessLeftText = document.getElementById("guessleft-text");
+      var guessedLettersText = document.getElementById("guessedLetters-text");
+      
 
-      function myFunction(stringToConsole) {
-        console.log("this" + stringToConsole);
-      }
 
       // This function is run whenever the user presses a key.
       document.onkeyup = function(event) {
@@ -44,36 +45,32 @@
         var userGuess = event.key;
 
         // Randomly chooses a choice from the options array. This is the Computer's guess.
-        var computerGuess =
-          computerChoices[Math.floor(Math.random() * computerChoices.length)];
+        var computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
 
 
-        // This logic determines the outcome of the game (win/loss/tie), and increments the appropriate number
+        // This logic determines the outcome of the game (win/loss/guesses left), and increments the appropriate number
         if (userGuess === computerGuess) {
-          if (
-            (userGuess === "r" && computerGuess === "s") ||
-            (userGuess === "s" && computerGuess === "p") ||
-            (userGuess === "p" && computerGuess === "r")
-          ) {
             wins++;
-          } else if (userGuess === computerGuess) {
-            ties++;
-          } else {
+          } 
+          else if (guessleft - 1 == 0) {
             losses++;
+          } else {
+            guessleft--;
+            guessedLetters.push(userGuess)
           }
 
-          // Hide the directions
-          directionsText.textContent = "";
 
-          // Display the user and computer guesses, and wins/losses/ties.
-          userChoiceText.textContent = "You chose: " + userGuess;
-          computerChoiceText.textContent =
-            "The computer chose: " + computerGuess;
-          winsText.textContent = "wins: " + wins;
-          lossesText.textContent = "losses: " + losses;
-          tiesText.textContent = "ties: " + ties;
-        }
-      };
+          // Display the user wins/losses/guess left.
+          winsText.textContent = wins;
+          lossesText.textContent = losses;
+          guessLeftText.textContent = guessleft;
+          guessedLettersText.textContent = guessedLetters;
+
+        //   Reset Game if guesses done
+
+
+        };
+      
     </script>
   </body>
 </html>
